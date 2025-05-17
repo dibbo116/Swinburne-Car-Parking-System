@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Car
+comment0.text=\r\n\ The\ Car\ class\ represents\ a\ car\ that\ can\ be\ parked\ in\ the\ car\ park\ system.\r\n\ It\ records\ car\ registration\ details,\ owner\ information,\ car\ type,\ and\ parking\ time.\r\n\ \r\n\ @author\ [Dibbo\ Barua\ Chamak]\ [105299366]\r\n\ @version\ 1.0\ -\ May\ 18,\ 2025\r\n
+comment1.params=registrationNumber\ owner\ isStaff
+comment1.target=Car(java.lang.String,\ java.lang.String,\ boolean)
+comment1.text=\r\n\ Constructor\ for\ Car\ object.\r\n\ Records\ registration\ number,\ owner,\ staff/visitor,\ and\ the\ park\ time.\r\n\ \r\n\ @param\ registrationNumber\ Car\ registration\ number\r\n\ @param\ owner\ The\ name\ of\ the\ car\ owner\r\n\ @param\ isStaff\ True\ if\ staff,\ false\ if\ visitor\r\n
+comment2.params=
+comment2.target=java.lang.String\ getRegistrationNumber()
+comment2.text=\r\n\ Gets\ the\ car's\ registration\ number.\r\n\ \r\n\ @return\ Registration\ number\ (String)\r\n
+comment3.params=
+comment3.target=java.lang.String\ getOwner()
+comment3.text=\r\n\ Gets\ the\ car\ owner's\ name.\r\n\ \r\n\ @return\ Owner's\ name\ (String)\r\n
+comment4.params=
+comment4.target=boolean\ isStaff()
+comment4.text=\r\n\ Checks\ if\ the\ car\ owner\ is\ staff.\r\n\ \r\n\ @return\ True\ if\ staff,\ false\ if\ visitor\r\n
+comment5.params=
+comment5.target=java.time.LocalDateTime\ getParkTime()
+comment5.text=\r\n\ Gets\ the\ time\ the\ car\ was\ parked.\r\n\ \r\n\ @return\ Park\ time\ (LocalDateTime)\r\n
+comment6.params=
+comment6.target=java.lang.String\ getFormattedParkTime()
+comment6.text=\r\n\ Gets\ the\ formatted\ park\ time\ as\ a\ string.\r\n\ \r\n\ @return\ Park\ time\ in\ 'yyyy-MM-dd\ HH\:mm\:ss'\ format\r\n
+numComments=7
