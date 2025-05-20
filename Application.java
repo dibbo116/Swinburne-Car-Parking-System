@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  *   parking slot status with full color coding and proper validation.
  *
  * @author [Dibbo Barua Chamak] [105299366]
- * @version 1.0 - May 18, 2025
+ * @version 1.0 - May 20, 2025
  */
 
 public class Application {
@@ -47,64 +47,69 @@ public class Application {
         refreshSlots();                 // Draw any slots (empty at startup)
     }
 
-
-    private void initGUI() {
     /**
-     * Initializes all GUI components, sets up the layout, panels, buttons, and event handlers.
-     * Ensures color-coding, proper font, and clear arrangement for all controls and displays.
+     * Initializes and arranges all GUI components for the main application window.
+     * 
+     * This includes building the title area, slot grid display, action buttons,
+     * status bar, and wiring up all event handlers.
+     * Ensures clear color-coding, logical layouts, readable fonts, and a user-friendly interface.
      */
-
-        frame = new JFrame("Swinburne Car Park System");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1050, 730);
-        frame.setLayout(new BorderLayout());
-
+    private void initGUI() {
+        // === Main Frame Setup ===
+        frame = new JFrame("Swinburne Car Park System"); // Main application window
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close program when window is closed
+        frame.setSize(1050, 730); // Set initial window size
+        frame.setLayout(new BorderLayout()); // Use BorderLayout for top, center, bottom regions
+    
         // === Title and Image Panel (Top) ===
         JPanel titlePanel = new JPanel(new BorderLayout());
-        titlePanel.setBackground(new Color(235, 235, 235));
-
+        titlePanel.setBackground(new Color(235, 235, 235)); // Light gray background for title
+    
         JLabel titleLabel = new JLabel("SWINBURNE CAR PARK SYSTEM", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Serif", Font.BOLD, 36));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(18, 0, 8, 0));
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 36)); // Large, bold title
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(18, 0, 8, 0)); // Spacing above and below title
         titlePanel.add(titleLabel, BorderLayout.NORTH);
-
+    
+        // Load and scale the car image for the top center
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/car.png"));
-        
         Image scaledImage = originalIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        
         JLabel carLabel = new JLabel(scaledIcon, SwingConstants.CENTER);
-        
-        // Add to your panel
         titlePanel.add(carLabel, BorderLayout.CENTER);
-        
+    
+        // Add the title panel to the top (NORTH) of the window
         frame.add(titlePanel, BorderLayout.NORTH);
-
+    
         // === Slots Grid Area (Center) ===
         JPanel slotsArea = new JPanel();
-        slotsArea.setLayout(new GridBagLayout());
+        slotsArea.setLayout(new GridBagLayout()); // Flexible layout for rows
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10);
-
-        visitorSlotPanel = new JPanel(new GridLayout(1, 5, 16, 0));
+        gbc.gridx = 0; // First column
+        gbc.gridy = 0; // First row
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Stretch rows to fill width
+        gbc.insets = new Insets(10, 10, 10, 10); // Padding around each row
+    
+        // Visitor slots row (top)
+        visitorSlotPanel = new JPanel(new GridLayout(1, 5, 16, 0)); // 1 row, 5 columns, 16px spacing
         visitorSlotPanel.setOpaque(false);
         visitorSlotPanel.setPreferredSize(new Dimension(830, 90));
-        slotsArea.add(visitorSlotPanel, gbc);
-
-        gbc.gridy++;
-        staffSlotPanel = new JPanel(new GridLayout(1, 5, 16, 0));
+        slotsArea.add(visitorSlotPanel, gbc); // Place in first row
+    
+        // Staff slots row (below visitor row)
+        gbc.gridy++; // Move to second row
+        staffSlotPanel = new JPanel(new GridLayout(1, 5, 16, 0)); // 1 row, 5 columns
         staffSlotPanel.setOpaque(false);
         staffSlotPanel.setPreferredSize(new Dimension(670, 90));
-        slotsArea.add(staffSlotPanel, gbc);
-
+        slotsArea.add(staffSlotPanel, gbc); // Place in second row
+    
+        // Add slots area to the center of the main frame
         frame.add(slotsArea, BorderLayout.CENTER);
-
+    
         // === Control Buttons Panel (Bottom) ===
-        JPanel controlPanel = new JPanel(new GridLayout(4, 2, 4, 0));
+        JPanel controlPanel = new JPanel(new GridLayout(4, 2, 4, 0)); // 4 rows, 2 columns for 8 buttons
         controlPanel.setPreferredSize(new Dimension(830, 130));
+        
+        // Create all action buttons
         JButton showAllBtn = new JButton("Show All Parking Spots");
         JButton findCarBtn = new JButton("Find Car");
         JButton parkCarBtn = new JButton("Park Car");
@@ -113,7 +118,8 @@ public class Application {
         JButton addSlotBtn = new JButton("Add Parking Spot");
         JButton exitBtn = new JButton("Exit Application");
         JButton clearScreenBtn = new JButton("Clear Screen");
-
+    
+        // Set a large, readable font for all buttons
         showAllBtn.setFont(new Font("Arial", Font.PLAIN, 18));
         findCarBtn.setFont(new Font("Arial", Font.PLAIN, 18));
         parkCarBtn.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -122,7 +128,8 @@ public class Application {
         addSlotBtn.setFont(new Font("Arial", Font.PLAIN, 18));
         exitBtn.setFont(new Font("Arial", Font.PLAIN, 18));
         clearScreenBtn.setFont(new Font("Arial", Font.PLAIN, 18));
-
+    
+        // Add all buttons to the control panel in order
         controlPanel.add(showAllBtn);
         controlPanel.add(findCarBtn);
         controlPanel.add(parkCarBtn);
@@ -131,34 +138,41 @@ public class Application {
         controlPanel.add(addSlotBtn);
         controlPanel.add(exitBtn);
         controlPanel.add(clearScreenBtn);
-
+    
+        // === Event Handlers for Buttons ===
         showAllBtn.addActionListener(e -> listSlotsDialog());
         findCarBtn.addActionListener(e -> findCarDialog());
         parkCarBtn.addActionListener(e -> parkCarDialog());
         deleteSlotBtn.addActionListener(e -> deleteSlotDialog());
         removeCarBtn.addActionListener(e -> removeCarDialog());
         addSlotBtn.addActionListener(e -> addSlotDialog());
-        exitBtn.addActionListener(e -> System.exit(0));
+        exitBtn.addActionListener(e -> System.exit(0)); // Quit app
         clearScreenBtn.addActionListener(e -> clearSlotsDisplay());
-
+    
+        // === Bottom Panel: Buttons + Status Bar ===
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(controlPanel, BorderLayout.CENTER);
+    
+        // Status bar at the bottom for feedback
         statusLabel = new JLabel("Welcome to Swinburne Car Park System", SwingConstants.CENTER);
         statusLabel.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 0));
         statusLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         bottomPanel.add(statusLabel, BorderLayout.SOUTH);
+    
+        // Add bottom panel to the main frame (bottom region)
         frame.add(bottomPanel, BorderLayout.SOUTH);
-
+    
+        // === Show the Completed Window ===
         frame.setVisible(true);
     }
 
-    private void refreshSlots() {
+    
     /**
      * Updates and redraws the visual display of all parking slots.
      * Each slot is shown as a button, colored by type and occupancy.
      * Keeps slot and button logic in sync, and keeps the interface clear and up-to-date.
      */
-    
+    private void refreshSlots() {
         visitorSlotPanel.removeAll();
         staffSlotPanel.removeAll();
         for (ParkingSlot slot : carPark.getAllSlots()) {
@@ -216,55 +230,100 @@ public class Application {
         staffSlotPanel.repaint();
     }
     
-    // Helper for left-click park via slot
+    /**
+     * Parks a car directly in the given parking slot after prompting the user for car details.
+     * 
+     * This helper is typically triggered by left-clicking a slot button. It prompts the user
+     * for the car registration number and owner name, validates input, ensures the car isn't
+     * already parked, creates the Car object, records the parking time, and displays a dialog
+     * confirming the slot and time parked.
+     *
+     * @param slot The ParkingSlot object where the car will be parked
+     */
     private void parkCarDirectly(ParkingSlot slot) {
+        // Prompt user for car registration number, require format Letter+5 digits
         String regNum = JOptionPane.showInputDialog(frame, "Enter Car Registration Number (Letter+5 digits):");
         if (regNum == null || !regNum.matches("[A-Z]\\d{5}")) {
             JOptionPane.showMessageDialog(frame, "Invalid registration number format.");
-            return;
+            return; // Stop if input is invalid or canceled
         }
+    
+        // Check that this car isn't already parked somewhere else
         if (carPark.findCar(regNum) != null) {
             JOptionPane.showMessageDialog(frame, "This car is already parked in another slot.");
             return;
         }
+    
+        // Prompt user for owner's name
         String owner = JOptionPane.showInputDialog(frame, "Enter Owner name:");
-        if (owner == null) return;
+        if (owner == null) return; // Stop if input is canceled
+    
+        // Determine the slot type (staff/visitor) for proper car creation
         String ownerType = slot.getType();
+    
+        // Create a new Car object; park time is automatically recorded in Car's constructor
         Car car = new Car(regNum, owner, ownerType.equals("staff"));
+    
+        // Park the car in the selected slot
         slot.parkCar(car);
+    
+        // Update status label to reflect the successful parking action
         statusLabel.setText("Car " + regNum + " parked in " + slot.getSlotId());
+    
+        // Refresh the slot panels so the change appears visually
         refreshSlots();
+    
+        // Prepare formatted time for dialog
         String parkTimeStr = car.getFormattedParkTime();
+    
+        // Show a confirmation dialog with slot and parking time information
         JOptionPane.showMessageDialog(frame,
             "Car " + regNum + " parked at slot " + slot.getSlotId() + ".\n" +
             "Parked at: " + parkTimeStr + "\n"
         );
+    
+        // Update the status label again for user feedback
         statusLabel.setText("Car " + regNum + " parked in " + slot.getSlotId());
     }
 
     
+    /**
+     * Returns a string representing the duration between the given park time
+     * and the current time, formatted as hours, minutes, and seconds.
+     *
+     * @param parkTime The time the car was parked (LocalDateTime)
+     * @return A formatted string, e.g. "0 hours 25 minutes 20 seconds"
+     */
     private String getDuration(LocalDateTime parkTime) {
         if (parkTime == null) return "";
+        // Calculate the duration since the car was parked
         Duration duration = Duration.between(parkTime, LocalDateTime.now());
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % 60;
         long seconds = duration.getSeconds() % 60;
+        // Format the duration as a readable string
         return hours + " hours " + minutes + " minutes " + seconds + " seconds";
         }
-
+    
+    /**
+     * Capitalizes the first letter of the input string and makes all other letters lowercase.
+     *
+     * @param str The input string to capitalize
+     * @return The capitalized string, or the original if null or empty
+     */
     private static String capitalize(String str) {
+        // If the input is null or empty, return it as is
         if (str == null || str.isEmpty()) return str;
+        // Capitalize first character, make the rest lowercase
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
-
-    private void addSlotDialog() {
     /**
      * Pops up dialogs for the user to input a new slot's ID and type (staff/visitor).
      * Adds the slot to the car park and refreshes the visual slot display.
      * Ensures proper input validation and error reporting in GUI.
      */
-
+    private void addSlotDialog() {
         String slotId = JOptionPane.showInputDialog(frame, "Enter Slot ID (Letter+3 digits):");
         if (slotId == null || !slotId.matches("[A-Z]\\d{3}")) {
             JOptionPane.showMessageDialog(frame, "Invalid Slot ID format.");
@@ -280,8 +339,7 @@ public class Application {
             JOptionPane.showMessageDialog(frame, "Slot ID already exists.");
         }
     }
-
-    private void parkCarDialog() {
+    
     /**
      * Lets the user park a car into a slot, ensuring:
      * - Input is via dialogs, validated format
@@ -290,7 +348,7 @@ public class Application {
      * - Park time is recorded
      * All output and errors shown in GUI dialogs/labels.
      */
-
+    private void parkCarDialog() {
         String slotId = JOptionPane.showInputDialog(frame, "Enter Slot ID to park car:");
         if (slotId == null) return;
         ParkingSlot slot = carPark.getSlot(slotId);
@@ -307,7 +365,7 @@ public class Application {
             JOptionPane.showMessageDialog(frame, "Invalid registration number format.");
             return;
         }
-        // CHECK IF CAR IS ALREADY PARKED IN ANY SLOT
+        // Check if car is already parked at any spot
         if (carPark.findCar(regNum) != null) {
             JOptionPane.showMessageDialog(frame, "This car is already parked in another slot.");
             return;
@@ -334,13 +392,11 @@ public class Application {
         statusLabel.setText("Car " + regNum + " parked in " + slotId);
     }
 
-
-    private void deleteSlotDialog() {
     /**
      * Allows the user to delete a parking slot (if it is not currently occupied).
      * Handles user input and all feedback through GUI dialogs and the status label.
      */
-
+    private void deleteSlotDialog() {
         String slotId = JOptionPane.showInputDialog(frame, "Enter Slot ID to delete:");
         if (slotId == null) return;
         ParkingSlot slot = carPark.getSlot(slotId);
@@ -360,13 +416,11 @@ public class Application {
         }
     }
 
-    private void findCarDialog() {
     /**
      * Lets the user search for a car by registration number.
      * Displays slot, owner, and time/duration in a GUI dialog if found.
-     * All interaction is via GUI.
      */
-
+    private void findCarDialog() {
         String regNum = JOptionPane.showInputDialog(frame, "Enter Car Registration Number:");
         if (regNum == null) return;
         ParkingSlot slot = carPark.findCar(regNum);
@@ -381,11 +435,10 @@ public class Application {
         }
     }
 
-    private void removeCarDialog() {
     /**
      * Lets the user remove a car by registration number from any slot.
      */
-
+    private void removeCarDialog() {
         String regNum = JOptionPane.showInputDialog(frame, "Enter Car Registration Number to remove:");
         if (regNum == null) return;
         ParkingSlot slot = carPark.findCar(regNum);
@@ -398,12 +451,11 @@ public class Application {
         }
     }
 
-    private void listSlotsDialog() {
     /**
-     * Displays a table with all parking slot info (slot ID, type, occupancy, car reg/owner).
+     * Displays a table with all parking slot info (slot ID, type, occupancy, car reg, owner, parked at, duration).
      * Uses JTable in a scrollable GUI dialog for clarity and to meet requirements.
      */
-    
+    private void listSlotsDialog() {
         java.util.List<ParkingSlot> slots = new ArrayList<>(carPark.getAllSlots());
         String[] columnNames = {"Slot ID", "Slot Type", "Occupied", "Car Registration", "Owner", "Parked At", "Duration"};
         String[][] data = new String[slots.size()][7];
@@ -435,26 +487,39 @@ public class Application {
         JOptionPane.showMessageDialog(frame, scrollPane, "All Parking Slots", JOptionPane.INFORMATION_MESSAGE);
     }
 
-
-
-    private void clearSlotsDisplay() {
     /**
-     * Clears the visual display panels for slots. (Used for demonstration, not deletion.)
+     * Clears the visual display panels for all parking slots.
+     * 
+     * This method removes all slot buttons from both the visitor and staff panels,
+     * and refreshes the panels to update the GUI. Note: This does not delete slots
+     * from the backend CarPark model; it only clears the GUI display.
+     * 
+     * Used for demonstration or to temporarily hide all slots.
      */
+    private void clearSlotsDisplay() {
+        // Remove all buttons from the visitor slot panel
         visitorSlotPanel.removeAll();
+    
+        // Remove all buttons from the staff slot panel
         staffSlotPanel.removeAll();
+    
+        // Refresh the visitor slot panel to update the GUI
         visitorSlotPanel.revalidate();
         visitorSlotPanel.repaint();
+    
+        // Refresh the staff slot panel to update the GUI
         staffSlotPanel.revalidate();
         staffSlotPanel.repaint();
+    
+        // Update the status bar to notify the user
         statusLabel.setText("Slots display cleared.");
     }
 
-    public static void main(String[] args) {
+
     /**
      * Launches the main application window.
      */
-
+    public static void main(String[] args) {
         new Application();
     }
 }

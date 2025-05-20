@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ParkingSlot
-comment0.text=\r\n\ The\ ParkingSlot\ class\ represents\ a\ single\ parking\ slot\ in\ the\ car\ park.\r\n\ Each\ slot\ has\ an\ ID,\ a\ type\ (staff\ or\ visitor),\ and\ may\ have\ a\ car\ parked\ in\ it.\r\n\ \r\n\ @author\ [Dibbo\ Barua\ Chamak]\ [105299366]\r\n\ @version\ 1.0\ -\ May\ 18,\ 2025\r\n
+comment0.text=\r\n\ The\ ParkingSlot\ class\ represents\ a\ single\ parking\ slot\ in\ the\ car\ park.\r\n\ Each\ slot\ has\ an\ ID,\ a\ type\ (staff\ or\ visitor),\ and\ may\ have\ a\ car\ parked\ in\ it.\r\n\ \r\n\ @author\ [Dibbo\ Barua\ Chamak]\ [105299366]\r\n\ @version\ 1.0\ -\ May\ 20,\ 2025\r\n
 comment1.params=slotId\ type
 comment1.target=ParkingSlot(java.lang.String,\ java.lang.String)
 comment1.text=\r\n\ Constructor\ for\ ParkingSlot.\r\n\ @param\ slotId\ The\ unique\ identifier\ for\ the\ slot\r\n\ @param\ type\ The\ type\ of\ slot\ ("staff"\ or\ "visitor")\r\n

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=CarPark
-comment0.text=\r\n\ The\ CarPark\ class\ manages\ all\ parking\ slots\ in\ the\ car\ park\ system.\r\n\ Provides\ methods\ to\ add,\ remove,\ and\ find\ parking\ slots\ and\ cars.\r\n\ \r\n\ @author\ [Dibbo\ Barua\ Chamak]\ [105299366]\r\n\ @version\ 1.0\ -\ May\ 18,\ 2025\r\n
+comment0.text=\r\n\ The\ CarPark\ class\ manages\ all\ parking\ slots\ in\ the\ car\ park\ system.\r\n\ Provides\ methods\ to\ add,\ remove,\ and\ find\ parking\ slots\ and\ cars.\r\n\ \r\n\ @author\ [Dibbo\ Barua\ Chamak]\ [105299366]\r\n\ @version\ 1.0\ -\ May\ 20,\ 2025\r\n
 comment1.params=slot
 comment1.target=boolean\ addSlot(ParkingSlot)
 comment1.text=\r\n\ Adds\ a\ new\ parking\ slot\ to\ the\ car\ park.\r\n\ @param\ slot\ The\ ParkingSlot\ to\ add\r\n\ @return\ true\ if\ slot\ was\ added,\ false\ if\ slot\ ID\ already\ exists\r\n

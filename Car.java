@@ -3,10 +3,10 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * The Car class represents a car that can be parked in the car park system.
- * It records car registration details, owner information, car type, and parking time.
+ * It records car registration details, owner name, car type, and parking time.
  * 
  * @author [Dibbo Barua Chamak] [105299366]
- * @version 1.0 - May 18, 2025
+ * @version 1.0 - May 20, 2025
  */
 
 public class Car {
@@ -24,7 +24,7 @@ public class Car {
 
     /**
      * Constructor for Car object.
-     * Records registration number, owner, staff/visitor, and the park time.
+     * Records registration number, owner's name, staff/visitor, and the park time.
      * 
      * @param registrationNumber Car registration number
      * @param owner The name of the car owner

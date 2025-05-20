@@ -3,7 +3,7 @@
  * Each slot has an ID, a type (staff or visitor), and may have a car parked in it.
  * 
  * @author [Dibbo Barua Chamak] [105299366]
- * @version 1.0 - May 18, 2025
+ * @version 1.0 - May 20, 2025
  */
 
 public class ParkingSlot {
